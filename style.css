@@ -1,0 +1,34 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.container{
+    width:100%;
+    display:grid;
+    grid-template-columns:50% 50%;
+    /* grid-column-gap:100px; */
+    grid-row-gap:5%;
+    
+}
+
+.box{
+    /* the width is 80% of the column of the grid */
+    width: 80%;
+    height:400px;
+    margin:auto;
+    border:1px solid black;
+}
+
+h1{
+    color:black;
+    margin:auto;
+    text-align:center;
+    font-size:35px;
+}
+
+
+/* body{
+    display:grid;
+
+} */

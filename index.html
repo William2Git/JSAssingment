@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculations Website</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 
 </head>
 
@@ -14,17 +15,20 @@
 <body>
     <br><br><br>
     <div class="container">
-        <form class="box heron">
+        <form class="box">
             <h1>Heron's Formula</h1>
-            <label>Side a</label>    
-            <input type="number">
-            <label>Side b</label>    
-            <input type="number">
-            <label>Side c</label>    
-            <input type="number">
-            <label>Area of the triangle</label>    
-            <input type="text" readonly style="cursor:no-drop">
-            <input type="submit" value="Calculate">
+            <div id="heron">
+                <label>Side a</label>
+                <input type="number">
+                <label>Side b</label>
+                <input type="number">
+                <label>Side c</label>
+                <input type="number">
+                <label>Area of the triangle</label>
+                <input type="text" readonly style="cursor:no-drop">
+
+            </div>
+            <input type="submit" value="Calculate" id="calc" style="cursor:pointer">
         </form>
 
         <div class="box amb">

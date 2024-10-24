@@ -18,6 +18,8 @@
     height:400px;
     margin:auto;
     border:1px solid black;
+
+    
 }
 
 h1{
@@ -25,6 +27,28 @@ h1{
     margin:auto;
     text-align:center;
     font-size:35px;
+}
+ 
+label{
+    text-align:center;
+}
+
+#heron{
+    display: grid;
+    margin:auto;
+    grid-template-columns: 10% 90%;
+    row-gap:20px;
+}
+
+#calc{
+    margin:auto;
+}
+
+
+input{
+    width:80%;
+    height:30px;
+    margin:auto;
 }
 
 

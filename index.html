@@ -15,21 +15,21 @@
 <body>
     <br><br><br>
     <div class="container">
-        <form class="box">
+        <div class="box">
             <h1>Heron's Formula</h1>
             <div id="heron">
                 <label>Side a</label>
-                <input type="number">
+                <input type="number" id="a">
                 <label>Side b</label>
-                <input type="number">
+                <input type="number" id="b">
                 <label>Side c</label>
-                <input type="number">
+                <input type="number" id="c">
                 <label>Area of the triangle</label>
-                <input type="text" readonly style="cursor:no-drop">
+                <input id="answer "type="text" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
 
             </div>
-            <input type="submit" value="Calculate" id="calc" style="cursor:pointer">
-        </form>
+            <input type="submit" value="Calculate" id="calc" style="cursor:pointer" onclick="heron()">
+        </div>
 
         <div class="box amb">
             <h1>Ambiguous Case</h1>

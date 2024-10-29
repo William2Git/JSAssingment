@@ -1,3 +1,5 @@
+/* use kabob case for css ( css-style) */
+
 *{
     margin:0;
     padding:0;
@@ -10,6 +12,7 @@
     /* grid-column-gap:100px; */
     grid-row-gap:5%;
     
+    
 }
 
 .box{
@@ -18,13 +21,15 @@
     height:400px;
     margin:auto;
     border:1px solid black;
-
+    position:relative;
     
 }
 
 h1{
     color:black;
     margin:auto;
+    margin-top:20px;
+    margin-bottom:20px;
     text-align:center;
     font-size:35px;
 }
@@ -35,13 +40,16 @@ label{
 
 #heron{
     display: grid;
-    margin:auto;
-    grid-template-columns: 10% 90%;
+    margin:20px;
+    grid-template-columns: 20% 80%;
     row-gap:20px;
+    column-gap:0;
 }
 
 #calc{
-    margin:auto;
+    position:absolute;
+    width:79%;
+    left: 10.5%;
 }
 
 

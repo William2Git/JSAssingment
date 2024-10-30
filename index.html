@@ -6,18 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculations Website</title>
+    
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    
 
 </head>
 
 
 <body>
     <br><br><br>
+    
     <div class="container">
         <div class="box">
             <h1>Heron's Formula</h1>
-            <div id="heron">
+            <div id="contents">
                 <label>Side a</label>
                 <input type="number" id="a">
                 <label>Side b</label>
@@ -25,30 +27,45 @@
                 <label>Side c</label>
                 <input type="number" id="c">
                 <label>Area of the triangle</label>
-                <input id="answer "type="text" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
+                <input type="text" id="heroAns" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
 
             </div>
-            <input type="submit" value="Calculate" id="calc" style="cursor:pointer" onclick="heron()">
+            <button id="heron" style="cursor:pointer">Calculate</button>
+
         </div>
 
-        <div class="box amb">
+        <div class="box">
             <h1>Ambiguous Case</h1>
+            <div id="contents">
+                <label>Angle A (Enter in Radians)</label>
+                <input type="number" id="angle">
+                <label>Side a</label>
+                <input type="number" id="sideA">
+                <label>Side b</label>
+                <input type="number" id="sideB">
+                <label>Triangle Type</label>
+                <input type="text" id="ambAns" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
+
+            </div>
+            <button id="amb" style="cursor:pointer">Calculate</button>
 
         </div>
 
-        <div class="box newton">
+        <div class="box">
             <h1>Newton's Method</h1>
+            
 
         </div>
 
-        <div class="box poly">
+        <div class="box">
             <h1>Polynomial Function</h1>
 
         </div>
 
     </div>
 
-
+    <script src="script.js"></script>
+    <br><br><br>
 </body>
 
 

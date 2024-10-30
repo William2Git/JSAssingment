@@ -38,7 +38,13 @@ label{
     text-align:center;
 }
 
-#heron{
+input{
+    width:80%;
+    height:30px;
+    margin:auto;
+}
+
+#contents{
     display: grid;
     margin:20px;
     grid-template-columns: 20% 80%;
@@ -46,18 +52,15 @@ label{
     column-gap:0;
 }
 
-#calc{
+#heron, #amb{
     position:absolute;
     width:79%;
     left: 10.5%;
-}
-
-
-input{
-    width:80%;
     height:30px;
-    margin:auto;
 }
+
+
+
 
 
 /* body{

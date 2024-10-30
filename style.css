@@ -52,7 +52,7 @@ input{
     column-gap:0;
 }
 
-#heron, #amb{
+#heron, #amb, #newton, #poly{
     position:absolute;
     width:79%;
     left: 10.5%;

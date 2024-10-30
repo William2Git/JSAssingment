@@ -53,12 +53,34 @@
 
         <div class="box">
             <h1>Newton's Method</h1>
-            
+            <div id="contents">
+                <label>Root Guess</label>
+                <input type="number" id="guess">
+                <label>Root Approximation</label>
+                <input type="text" id="approx" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
+
+            </div>
+            <button id="newton" style="cursor:pointer">Calculate</button>
+
 
         </div>
 
         <div class="box">
             <h1>Polynomial Function</h1>
+            <div id="contents">
+                <label>Coefficients</label>
+                <input type="number" id="coeff">
+                <label>Exponents</label>
+                <input type="number" id="expo">
+                <label>x Value</label>
+                <input type="number" id="x">
+                <label>Polynomial Function</label>
+                <input type="text" id="equation" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
+                <label>Polynomial Evaluation</label>
+                <input type="text" id="eval" readonly style="cursor:no-drop; background-color:rgb(187, 187, 187)">
+
+            </div>
+            <button id="poly" style="cursor:pointer">Calculate</button>
 
         </div>
 

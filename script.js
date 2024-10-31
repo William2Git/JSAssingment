@@ -1,5 +1,6 @@
 // link return systems to definitions
 // convert degrees to radians
+//create text overflow bar for amb case poly function
 
 document.getElementById("heron").addEventListener("click", function () {
     const a = document.getElementById("a").value;
@@ -12,14 +13,33 @@ document.getElementById("heron").addEventListener("click", function () {
 document.getElementById("amb").addEventListener("click", ambiguousCase);
 
 document.getElementById("newton").addEventListener("click", function () {
-    const g = document.getElementById("guess")
+    const g = document.getElementById("guess").value;
     document.getElementById("approx").value = newtonMethod(g);
+
+});
+
+document.getElementById("poly").addEventListener("click", function () {
+    const coefficients = document.getElementById("coeff").value.split(" ");
+    const exponents = document.getElementById("expo").value.split(" ");
+
+    console.log(coefficients);
+    console.log(exponents);
+    const xValue = document.getElementById("x").value;
+
+    if (coefficients.length != exponents.length) {
+        document.getElementById("equation").value = "Please enter an equal number of coefficients and exponents";
+        return;
+    }
+
+    document.getElementById("equation").value = polynomialEqn(coefficients, exponents, xValue);
+    document.getElementById("eval").value = polynomialEval();
+
 
 });
 
 
 function heronFormula(a, b, c) {
-    
+
     if (a > 0 && b > 0 && c > 0) {
         const radicand = 4 * a * a * b * b - Math.pow(a * a + b * b - c * c, 2);
 
@@ -30,7 +50,6 @@ function heronFormula(a, b, c) {
     return "This triangle does not exist.";
 
 }
-
 
 
 function ambiguousCase() {
@@ -72,14 +91,72 @@ function ambiguousCase() {
 
 function newtonMethod(g) {
 
-    const original = 6*Math.pow(g,4) - 13*Math.pow(g,3) - 18*Math.pow(g,2) + 7*g + 6;
-    const deriv = 24*Math.pow(g,3) - 39*Math.pow(g,2) -36*g +7;
+    let guess = g, root = g;
 
-    const approx = g - original/deriv;
+    do {
+        guess = root;
+        let original = 6 * Math.pow(guess, 4) - 13 * Math.pow(guess, 3) - 18 * Math.pow(guess, 2) + 7 * guess + 6;
+        let derivative = 24 * Math.pow(guess, 3) - 39 * Math.pow(guess, 2) - 36 * guess + 7;
 
-    while(g-approx>0.0001 ){
+        root = guess - original / derivative;
+    } while (Math.abs(guess - root) > 0.0001)
+
+    return Math.round(root * 10000) / 10000;
+}
+
+
+function polynomialEqn(coeff, expo, x) {
+    let equation = [];
+    let constant = 0;
+
+    for (let i = 0; i < coeff.length; i++) {
+        if (coeff[i] == 0) {
+            continue;
+        }
+        if (expo[i] == 0) {
+            constant++;
+            continue;
+        }
+
+
+        if (equation.length == 0) {
+            equation.push(coeff[i], expo[i]);
+        }else {
+            //sorts the terms so that the polynomial is arranged from highest power to lowest
+
+
+            if (expo[i] > equation[1]) {
+                equation.unshift(coeff[i], expo[i]);
+            } else if (expo[i] < equation[equation.length -1]) {
+                equation.push(coeff[i], expo[i]);
+            }
+            
+        }
+
+
+        console.log(i);
+
+
+        // if(coeff[i]==0){
+        //     equation+="+"
+        //     continue;
+        // }
+
+        // equation+= `${coeff[i]}x^${expo[i]}`;
+        // if(i<coeff.length -1 && coeff[i+1]>0){
+        //     equation+="+";
+        // }
 
     }
 
+    for (let i = 0; i < equation.length; i++) {
+
+    }
+
+    console.log(equation);
+    return equation;
+}
+
+function polynomialEval() {
     return;
 }

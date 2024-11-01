@@ -4,22 +4,25 @@ document.getElementById("heron").addEventListener("click", function () {
     const a = document.getElementById("a").value;
     const b = document.getElementById("b").value;
     const c = document.getElementById("c").value;
+
+    //displays the area of the triangle
     document.getElementById("heroAns").value = heronFormula(a, b, c);
 
 });
 
-document.getElementById("amb").addEventListener("click", function(){
-    const angleA = Math.PI *document.getElementById("angle").value/180;
+document.getElementById("amb").addEventListener("click", function () {
+    //converts degrees to radians
+    const angleA = Math.PI * document.getElementById("angle").value / 180;
     const a = document.getElementById("sideA").value;
     const b = document.getElementById("sideB").value;
 
-    document.getElementById("ambAns").value=ambiguousCase(angleA,a,b);
+    document.getElementById("ambAns").value = ambiguousCase(angleA, a, b);
 });
 
 document.getElementById("newton").addEventListener("click", function () {
     const g = document.getElementById("guess").value;
-    document.getElementById("approx").value = newtonMethod(g);
 
+    document.getElementById("approx").value = newtonMethod(g);
 });
 
 document.getElementById("poly").addEventListener("click", function () {
@@ -32,16 +35,17 @@ document.getElementById("poly").addEventListener("click", function () {
         return;
     }
 
-    const answer =polynomialEqn(coefficients, exponents, xValue);
+    const answer = polynomialEqn(coefficients, exponents, xValue);
     document.getElementById("equation").value = answer[0];
-    document.getElementById("eval").value= answer[1];
+    document.getElementById("eval").value = answer[1];
 });
 
 
 function heronFormula(a, b, c) {
-
+    //the side values entered must be positive
     if (a > 0 && b > 0 && c > 0) {
         const radicand = 4 * a * a * b * b - Math.pow(a * a + b * b - c * c, 2);
+        //if the number inside the radical is negative or 0, then there is no triangle
 
         if (radicand > 0) {
             return Math.round(100 * Math.sqrt(radicand) / 4) / 100;
@@ -51,9 +55,8 @@ function heronFormula(a, b, c) {
 
 }
 
-function ambiguousCase(angle,a,b) {
-    
-    const h = Math.round(1000*b * Math.sin(angle))/1000;
+function ambiguousCase(angle, a, b) {
+    const h = Math.round(1000 * b * Math.sin(angle)) / 1000;
 
     // if the angle is greater than 180 there is no triangle 
     if (angle >= Math.PI || angle <= 0) {
@@ -101,45 +104,49 @@ function newtonMethod(g) {
 
 
 function polynomialEqn(coeff, expo, x) {
-    let coeffExpo =[];
-    let constant =0;
-    let answer=["f(x) = ", 0];
+    let coeffExpo = [];
+    let constant = 0;
+    let answer = ["f(x) = ", 0];
     //sorts the exponents so they are organized from highest power to lowest power
-    for (let i=0;i<expo.length;i++){
-        coeffExpo[i]=[];
-        coeffExpo[i][0]=parseFloat(expo[i]);
-        coeffExpo[i][1]=parseFloat(coeff[i]);
+    for (let i = 0; i < expo.length; i++) {
+        coeffExpo[i] = [];
+        coeffExpo[i][0] = parseFloat(expo[i]);
+        coeffExpo[i][1] = parseFloat(coeff[i]);
     }
 
-    coeffExpo.sort(function(a,b){
-        return b[0]-a[0];
+    coeffExpo.sort(function (a, b) {
+        return b[0] - a[0];
     });
 
-    for(let i= 0; i<coeffExpo.length;i++){
+    for (let i = 0; i < coeffExpo.length; i++) {
         //if exponent is zero, add that to constant value
-        if(coeffExpo[i][0]==0){
-            constant+= parseFloat(coeffExpo[i][1]);
+        if (coeffExpo[i][0] == 0) {
+            constant += parseFloat(coeffExpo[i][1]);
             continue;
         }
         //if coefficient is zero, do not include the term in the equation
-        if(coeffExpo[i][1]==0){
+        if (coeffExpo[i][1] == 0) {
             continue;
         }
 
         //if coefficient is positive, put a plus sign
-        if(i>0 && coeffExpo[i][1]>0){
-            answer[0]+="+";
+        if (i > 0 && coeffExpo[i][1] > 0) {
+            answer[0] += "+";
         }
 
-        answer[0]+= `${coeffExpo[i][1]}x^${coeffExpo[i][0]} `;
-        answer[1]+= coeffExpo[i][1] * Math.pow(x, coeffExpo[i][0]);
+        //adds the coefficients and exponents to the equation
+        answer[0] += `${coeffExpo[i][1]}x^${coeffExpo[i][0]} `;
+
+        //calculates the evaluation of f(x)
+        answer[1] += coeffExpo[i][1] * Math.pow(x, coeffExpo[i][0]);
 
     }
 
-    if(constant !=0){
-        answer[0]+=`+${constant}`;
+    //adds the constant value to the equation
+    if (constant != 0) {
+        answer[0] += `+${constant}`;
     }
-    answer[1]= `f(${x}) = ${answer[1]+constant}`;
+    answer[1] = `f(${x}) = ${answer[1] + constant}`;
 
     return answer;
 }

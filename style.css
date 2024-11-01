@@ -1,70 +1,69 @@
-
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    background-color:rgb(239, 248, 255);
+body {
+    background-color: rgb(239, 248, 255);
 }
 
-.container{
-    width:100%;
-    display:grid;
-    grid-template-columns:50% 50%;
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
     /* grid-column-gap:100px; */
-    grid-row-gap:5%;
-    
-    
+    grid-row-gap: 5%;
+
+
 }
 
-.box{
+.box {
     /* the width is 80% of the column of the grid */
     width: 80%;
-    height:400px;
-    margin:auto;
-    border:1px solid black;
-    position:relative;
+    height: 400px;
+    margin: auto;
+    border: 1px solid black;
+    position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s;
-    
+
 }
 
-.box:hover{
+.box:hover {
     transform: translateY(-5px);
 }
 
-h1{
-    color:black;
-    margin:auto;
-    margin-top:20px;
-    margin-bottom:20px;
-    text-align:center;
-    font-size:35px;
-}
- 
-label{
-    text-align:center;
+h1 {
+    color: black;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 35px;
 }
 
-input{
-    width:80%;
-    height:30px;
-    margin:auto;
+label {
+    text-align: center;
 }
 
-#contents{
+input {
+    width: 80%;
+    height: 30px;
+    margin: auto;
+}
+
+#contents {
     display: grid;
-    margin:20px;
+    margin: 20px;
     grid-template-columns: 20% 80%;
-    row-gap:20px;
-    column-gap:0;
+    row-gap: 20px;
+    column-gap: 0;
 }
 
-#heron, #amb, #newton, #poly{
-    position:absolute;
-    width:79%;
+#heron, #amb, #newton, #poly {
+    position: absolute;
+    width: 79%;
     left: 10.5%;
-    height:30px;
+    height: 30px;
 }

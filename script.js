@@ -1,6 +1,4 @@
-// link return systems to definitions
-// convert degrees to radians
-//create text overflow bar for amb case poly function
+
 
 document.getElementById("heron").addEventListener("click", function () {
     const a = document.getElementById("a").value;
@@ -10,7 +8,13 @@ document.getElementById("heron").addEventListener("click", function () {
 
 });
 
-document.getElementById("amb").addEventListener("click", ambiguousCase);
+document.getElementById("amb").addEventListener("click", function(){
+    const angleA = Math.PI *document.getElementById("angle").value/180;
+    const a = document.getElementById("sideA").value;
+    const b = document.getElementById("sideB").value;
+
+    document.getElementById("ambAns").value=ambiguousCase(angleA,a,b);
+});
 
 document.getElementById("newton").addEventListener("click", function () {
     const g = document.getElementById("guess").value;
@@ -19,11 +23,8 @@ document.getElementById("newton").addEventListener("click", function () {
 });
 
 document.getElementById("poly").addEventListener("click", function () {
-    const coefficients = document.getElementById("coeff").value.split(" ");
-    const exponents = document.getElementById("expo").value.split(" ");
-
-    console.log(coefficients);
-    console.log(exponents);
+    const coefficients = document.getElementById("coeff").value.trim().split(" ");
+    const exponents = document.getElementById("expo").value.trim().split(" ");
     const xValue = document.getElementById("x").value;
 
     if (coefficients.length != exponents.length) {
@@ -31,10 +32,9 @@ document.getElementById("poly").addEventListener("click", function () {
         return;
     }
 
-    document.getElementById("equation").value = polynomialEqn(coefficients, exponents, xValue);
-    document.getElementById("eval").value = polynomialEval();
-
-
+    const answer =polynomialEqn(coefficients, exponents, xValue);
+    document.getElementById("equation").value = answer[0];
+    document.getElementById("eval").value= answer[1];
 });
 
 
@@ -51,42 +51,37 @@ function heronFormula(a, b, c) {
 
 }
 
-
-function ambiguousCase() {
-    const angleA = document.getElementById("angle").value;
-    const a = document.getElementById("sideA").value;
-    const b = document.getElementById("sideB").value;
-    const h = b * Math.sin(angleA);
-    const answer = document.getElementById("ambAns");
+function ambiguousCase(angle,a,b) {
+    
+    const h = Math.round(1000*b * Math.sin(angle))/1000;
 
     // if the angle is greater than 180 there is no triangle 
-    if (angleA >= Math.PI || angleA <= 0) {
-        answer.value = "No triangles exist";
-    } else if (angleA < Math.PI / 2) {
+    if (angle >= Math.PI || angle <= 0) {
+        return "No triangles exist";
+    } else if (angle < Math.PI / 2) {
         if (a < h) {
-            answer.value = "No triangles exist";
+            return "No triangles exist";
         } else if (a == h) {
-            answer.value = "One right angled triangle exists";
+            return "One right angled triangle exists";
         } else if (a >= b) { //if a=b, then it must be an isoceles triangle where angleA=angleB
-            answer.value = "One triangle exists";
+            return "One triangle exists";
         } else {
-            answer.value = "Two triangles exists (ambiguous case)";
+            return "Two triangles exists (ambiguous case)";
         }
-    } else if (angleA > Math.PI / 2) {
+    } else if (angle > Math.PI / 2) {
         if (a <= b) {
-            answer.value = "No triangles exist";
+            return "No triangles exist";
         } else {
-            answer.value = "One obtuse triangle exists";
+            return "One obtuse triangle exists";
         }
     } else { //if the angle entered is 90 degrees
         if (a > b) {
-            answer.value = "One right angle triangle exists";
+            return "One right angle triangle exists";
         } else {
-            answer.value = "No triangles exist";
+            return "No triangles exist";
         }
     }
 
-    return;
 }
 
 function newtonMethod(g) {
@@ -106,57 +101,45 @@ function newtonMethod(g) {
 
 
 function polynomialEqn(coeff, expo, x) {
-    let equation = [];
-    let constant = 0;
+    let coeffExpo =[];
+    let constant =0;
+    let answer=["f(x) = ", 0];
+    //sorts the exponents so they are organized from highest power to lowest power
+    for (let i=0;i<expo.length;i++){
+        coeffExpo[i]=[];
+        coeffExpo[i][0]=parseFloat(expo[i]);
+        coeffExpo[i][1]=parseFloat(coeff[i]);
+    }
 
-    for (let i = 0; i < coeff.length; i++) {
-        if (coeff[i] == 0) {
+    coeffExpo.sort(function(a,b){
+        return b[0]-a[0];
+    });
+
+    for(let i= 0; i<coeffExpo.length;i++){
+        //if exponent is zero, add that to constant value
+        if(coeffExpo[i][0]==0){
+            constant+= parseFloat(coeffExpo[i][1]);
             continue;
         }
-        if (expo[i] == 0) {
-            constant++;
+        //if coefficient is zero, do not include the term in the equation
+        if(coeffExpo[i][1]==0){
             continue;
         }
 
-
-        if (equation.length == 0) {
-            equation.push(coeff[i], expo[i]);
-        }else {
-            //sorts the terms so that the polynomial is arranged from highest power to lowest
-
-
-            if (expo[i] > equation[1]) {
-                equation.unshift(coeff[i], expo[i]);
-            } else if (expo[i] < equation[equation.length -1]) {
-                equation.push(coeff[i], expo[i]);
-            }
-            
+        //if coefficient is positive, put a plus sign
+        if(i>0 && coeffExpo[i][1]>0){
+            answer[0]+="+";
         }
 
-
-        console.log(i);
-
-
-        // if(coeff[i]==0){
-        //     equation+="+"
-        //     continue;
-        // }
-
-        // equation+= `${coeff[i]}x^${expo[i]}`;
-        // if(i<coeff.length -1 && coeff[i+1]>0){
-        //     equation+="+";
-        // }
+        answer[0]+= `${coeffExpo[i][1]}x^${coeffExpo[i][0]} `;
+        answer[1]+= coeffExpo[i][1] * Math.pow(x, coeffExpo[i][0]);
 
     }
 
-    for (let i = 0; i < equation.length; i++) {
-
+    if(constant !=0){
+        answer[0]+=`+${constant}`;
     }
+    answer[1]= `f(${x}) = ${answer[1]+constant}`;
 
-    console.log(equation);
-    return equation;
-}
-
-function polynomialEval() {
-    return;
+    return answer;
 }
